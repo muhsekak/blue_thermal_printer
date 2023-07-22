@@ -78,13 +78,13 @@ public class BlueThermalPrinterPlugin implements FlutterPlugin, ActivityAware,Me
   private BluetoothManager mBluetoothManager;
 
   private Activity activity;
-  public static void registerWith(Registrar registrar) {
-    final BlueThermalPrinterPlugin instance = new BlueThermalPrinterPlugin();
-    //registrar.addRequestPermissionsResultListener(instance);
-    Activity activity = registrar.activity();
-    Application application = null;
-    instance.setup(registrar.messenger(), application, activity, registrar, null);
-  }
+//  public static void registerWith(Registrar registrar) {
+//    final BlueThermalPrinterPlugin instance = new BlueThermalPrinterPlugin();
+//    //registrar.addRequestPermissionsResultListener(instance);
+//    Activity activity = registrar.activity();
+//    Application application = null;
+//    instance.setup(registrar.messenger(), application, activity, registrar, null);
+//  }
 
   public BlueThermalPrinterPlugin() {
   }
