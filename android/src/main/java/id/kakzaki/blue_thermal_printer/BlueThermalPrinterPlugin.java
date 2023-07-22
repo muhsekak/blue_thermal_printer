@@ -237,7 +237,7 @@ public class BlueThermalPrinterPlugin implements FlutterPlugin, ActivityAware,Me
                     ContextCompat.checkSelfPermission(activity,
                             Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
 
-              ActivityCompat.requestPermissions(activity,new String[]{
+              ActivityCompat.requestPermissions(new String[]{
                       Manifest.permission.BLUETOOTH_SCAN,
                       Manifest.permission.BLUETOOTH_CONNECT,
                       Manifest.permission.ACCESS_FINE_LOCATION,
@@ -251,8 +251,7 @@ public class BlueThermalPrinterPlugin implements FlutterPlugin, ActivityAware,Me
                     Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED||ContextCompat.checkSelfPermission(activity,
                     Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
 
-              ActivityCompat.requestPermissions(activity,
-                      new String[] { Manifest.permission.ACCESS_COARSE_LOCATION,Manifest.permission.ACCESS_FINE_LOCATION }, REQUEST_COARSE_LOCATION_PERMISSIONS);
+              ActivityCompat.requestPermissions(new String[] { Manifest.permission.ACCESS_COARSE_LOCATION,Manifest.permission.ACCESS_FINE_LOCATION }, REQUEST_COARSE_LOCATION_PERMISSIONS);
 
               pendingResult = result;
               break;
