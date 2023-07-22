@@ -258,6 +258,13 @@ public class BlueThermalPrinterPlugin implements FlutterPlugin, ActivityAware,Me
 
               activity.requestPermissions(ANDROID_12_BLE_PERMISSIONS, 1);
 
+//              ActivityCompat.requestPermissions(activity,new String[]{
+//                      Manifest.permission.BLUETOOTH_SCAN,
+//                      Manifest.permission.BLUETOOTH_CONNECT,
+//                      Manifest.permission.ACCESS_FINE_LOCATION,
+//              }, 1);
+
+
               pendingResult = result;
               break;
             }
@@ -267,6 +274,10 @@ public class BlueThermalPrinterPlugin implements FlutterPlugin, ActivityAware,Me
                     Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
 
               activity.requestPermissions(BLE_PERMISSIONS, REQUEST_COARSE_LOCATION_PERMISSIONS);
+
+//              ActivityCompat.requestPermissions(activity,
+//                      new String[] { Manifest.permission.ACCESS_COARSE_LOCATION,Manifest.permission.ACCESS_FINE_LOCATION }, REQUEST_COARSE_LOCATION_PERMISSIONS);
+
 
               pendingResult = result;
               break;
