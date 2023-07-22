@@ -78,6 +78,14 @@ public class BlueThermalPrinterPlugin implements FlutterPlugin, ActivityAware,Me
   private BluetoothManager mBluetoothManager;
 
   private Activity activity;
+  public static void registerWith(Registrar registrar) {
+    final BlueThermalPrinterPlugin instance = new BlueThermalPrinterPlugin();
+    //registrar.addRequestPermissionsResultListener(instance);
+    Activity activity = registrar.activity();
+    Application application = null;
+    instance.setup(registrar.messenger(), application, activity, registrar, null);
+
+  }
 
   public BlueThermalPrinterPlugin() {
   }
@@ -228,6 +236,17 @@ public class BlueThermalPrinterPlugin implements FlutterPlugin, ActivityAware,Me
       case "getBondedDevices":
         try {
 
+          final String[] BLE_PERMISSIONS = new String[]{
+                  Manifest.permission.ACCESS_COARSE_LOCATION,
+                  Manifest.permission.ACCESS_FINE_LOCATION,
+          };
+
+          final String[] ANDROID_12_BLE_PERMISSIONS = new String[]{
+                  Manifest.permission.BLUETOOTH_SCAN,
+                  Manifest.permission.BLUETOOTH_CONNECT,
+                  Manifest.permission.ACCESS_FINE_LOCATION,
+          };
+
           if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
 
             if (ContextCompat.checkSelfPermission(activity,
@@ -237,11 +256,7 @@ public class BlueThermalPrinterPlugin implements FlutterPlugin, ActivityAware,Me
                     ContextCompat.checkSelfPermission(activity,
                             Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
 
-              ActivityCompat.requestPermissions(activity,new String[]{
-                      Manifest.permission.BLUETOOTH_SCAN,
-                      Manifest.permission.BLUETOOTH_CONNECT,
-                      Manifest.permission.ACCESS_FINE_LOCATION,
-              }, 1);
+              activity.requestPermissions(ANDROID_12_BLE_PERMISSIONS, 1);
 
               pendingResult = result;
               break;
@@ -251,8 +266,7 @@ public class BlueThermalPrinterPlugin implements FlutterPlugin, ActivityAware,Me
                     Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED||ContextCompat.checkSelfPermission(activity,
                     Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
 
-              ActivityCompat.requestPermissions(activity,
-                      new String[] { Manifest.permission.ACCESS_COARSE_LOCATION,Manifest.permission.ACCESS_FINE_LOCATION }, REQUEST_COARSE_LOCATION_PERMISSIONS);
+              activity.requestPermissions(BLE_PERMISSIONS, REQUEST_COARSE_LOCATION_PERMISSIONS);
 
               pendingResult = result;
               break;
